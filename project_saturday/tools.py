@@ -617,9 +617,23 @@ def nl_to_sql(user_query: str, schema_description: str = None) -> str:
     Uses OpenRouter API.
     """
     from openai import OpenAI
+    import os
 
-    if OPENROUTER_API_KEY is None:
-        raise ValueError("OPENROUTER_API_KEY not set. Please set tools.OPENROUTER_API_KEY in your notebook.")
+    # Try to get API key from multiple sources
+    api_key = OPENROUTER_API_KEY
+    if api_key is None:
+        # Try to get from environment variable
+        api_key = os.environ.get('OPENROUTER_API_KEY')
+    if api_key is None:
+        # Try to get from Google Colab userdata
+        try:
+            from google.colab import userdata
+            api_key = userdata.get('OPENROUTER_API_KEY')
+        except:
+            pass
+
+    if api_key is None:
+        raise ValueError("OPENROUTER_API_KEY not set. Please set tools.OPENROUTER_API_KEY in your notebook, or ensure it's available in Colab secrets.")
 
     if schema_description is None:
         schema_description = get_db_schema_description()
@@ -640,7 +654,7 @@ User Query: {user_query}
 SQL Query:"""
 
     client = OpenAI(
-        api_key=OPENROUTER_API_KEY,
+        api_key=api_key,
         base_url="https://openrouter.ai/api/v1"
     )
 
