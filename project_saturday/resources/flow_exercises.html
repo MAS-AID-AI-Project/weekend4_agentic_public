@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    .flow-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        padding: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        margin: 20px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .flow-box {
+        background: white;
+        border: 3px solid transparent;
+        border-radius: 12px;
+        padding: 25px 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 15px;
+        font-weight: 600;
+        position: relative;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .flow-box:hover:not(.selected) {
+        background-color: #f0f7ff;
+        border-color: #4CAF50;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 8px 15px rgba(76, 175, 80, 0.3);
+    }
+    .flow-box.selected {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        border-color: #45a049;
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+    }
+    .flow-box .order-number {
+        display: none;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: #FF5722;
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        font-size: 16px;
+        font-weight: bold;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .flow-box.selected .order-number {
+        display: flex;
+    }
+    .flow-box .emoji {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+    .controls {
+        margin: 25px 0;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+    .btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 700;
+        transition: all 0.2s;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .btn-check {
+        background: linear-gradient(135deg, #2196F3 0%, #0b7dda 100%);
+        color: white;
+    }
+    .btn-check:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(33, 150, 243, 0.4);
+    }
+    .btn-reset {
+        background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+        color: white;
+    }
+    .btn-reset:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4);
+    }
+    .feedback {
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        font-weight: 500;
+        display: none;
+        font-size: 15px;
+        line-height: 1.6;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .feedback.success {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        color: #155724;
+        border-left: 5px solid #28a745;
+        display: block;
+    }
+    .feedback.error {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        color: #721c24;
+        border-left: 5px solid #dc3545;
+        display: block;
+    }
+</style>
+</head>
+<body>
+
+<!-- Exercise 1: Customer Support Flow -->
+<div id="exercise1">
+    <div class="flow-container" id="flow1">
+        <div class="flow-box" data-id="1">
+            <div class="order-number"></div>
+            <div class="emoji">📧</div>
+            <div>Client Mailbox</div>
+        </div>
+        <div class="flow-box" data-id="2">
+            <div class="order-number"></div>
+            <div class="emoji">🖥️</div>
+            <div>Server Backend</div>
+        </div>
+        <div class="flow-box" data-id="3">
+            <div class="order-number"></div>
+            <div class="emoji">📬</div>
+            <div>Server Mailbox</div>
+        </div>
+        <div class="flow-box" data-id="4">
+            <div class="order-number"></div>
+            <div class="emoji">🤖</div>
+            <div>LLM Agent</div>
+        </div>
+        <div class="flow-box" data-id="5">
+            <div class="order-number"></div>
+            <div class="emoji">📚</div>
+            <div>Knowledge Bank</div>
+        </div>
+        <div class="flow-box" data-id="6">
+            <div class="order-number"></div>
+            <div class="emoji">💾</div>
+            <div>Product Database</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-check" onclick="checkAnswer1()">Check Answer</button>
+        <button class="btn btn-reset" onclick="resetFlow1()">Reset</button>
+    </div>
+
+    <div class="feedback" id="feedback1"></div>
+</div>
+
+<!-- Exercise 2: Admin Analytics Flow -->
+<div id="exercise2" style="margin-top: 60px;">
+    <div class="flow-container" id="flow2">
+        <div class="flow-box" data-id="1">
+            <div class="order-number"></div>
+            <div class="emoji">👤</div>
+            <div>Admin Request</div>
+        </div>
+        <div class="flow-box" data-id="2">
+            <div class="order-number"></div>
+            <div class="emoji">🔐</div>
+            <div>Authentication</div>
+        </div>
+        <div class="flow-box" data-id="3">
+            <div class="order-number"></div>
+            <div class="emoji">🤖</div>
+            <div>LLM Agent</div>
+        </div>
+        <div class="flow-box" data-id="4">
+            <div class="order-number"></div>
+            <div class="emoji">🔧</div>
+            <div>ORM Layer</div>
+        </div>
+        <div class="flow-box" data-id="5">
+            <div class="order-number"></div>
+            <div class="emoji">💾</div>
+            <div>Database</div>
+        </div>
+        <div class="flow-box" data-id="6">
+            <div class="order-number"></div>
+            <div class="emoji">📊</div>
+            <div>Plotting Tool</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-check" onclick="checkAnswer2()">Check Answer</button>
+        <button class="btn btn-reset" onclick="resetFlow2()">Reset</button>
+    </div>
+
+    <div class="feedback" id="feedback2"></div>
+</div>
+
+<script>
+    // Exercise 1: Customer Support Flow
+    let selectedOrder1 = [];
+    let selectionMap1 = {};  // Track which boxes are selected and their order
+    const correctOrder1 = [1, 3, 4, 5, 6, 3, 1];
+
+    document.querySelectorAll('#flow1 .flow-box').forEach(box => {
+        box.addEventListener('click', function() {
+            const id = parseInt(this.getAttribute('data-id'));
+
+            // If already selected, unselect it
+            if (this.classList.contains('selected')) {
+                const orderNum = selectionMap1[id];
+                delete selectionMap1[id];
+
+                // Remove this ID from selectedOrder1
+                selectedOrder1 = selectedOrder1.filter((val, idx) => {
+                    if (val === id && selectionMap1[val] === undefined) {
+                        return false;
+                    }
+                    return true;
+                });
+
+                // Rebuild the entire selection based on remaining items
+                const remainingSelections = [];
+                for (let i = 0; i < selectedOrder1.length; i++) {
+                    if (i < orderNum - 1 || i > orderNum - 1) {
+                        remainingSelections.push(selectedOrder1[i]);
+                    }
+                }
+
+                // Clear all and rebuild
+                document.querySelectorAll('#flow1 .flow-box').forEach(b => {
+                    b.classList.remove('selected');
+                    b.querySelector('.order-number').textContent = '';
+                });
+
+                selectedOrder1 = remainingSelections;
+                selectionMap1 = {};
+
+                // Re-apply selections
+                selectedOrder1.forEach((itemId, idx) => {
+                    const targetBox = document.querySelector(`#flow1 .flow-box[data-id="${itemId}"]`);
+                    if (targetBox) {
+                        targetBox.classList.add('selected');
+                        targetBox.querySelector('.order-number').textContent = idx + 1;
+                        selectionMap1[itemId] = idx + 1;
+                    }
+                });
+            } else {
+                // Add new selection
+                selectedOrder1.push(id);
+                const orderNum = selectedOrder1.length;
+                this.classList.add('selected');
+                this.querySelector('.order-number').textContent = orderNum;
+                selectionMap1[id] = orderNum;
+            }
+        });
+    });
+
+    function resetFlow1() {
+        selectedOrder1 = [];
+        selectionMap1 = {};
+        document.querySelectorAll('#flow1 .flow-box').forEach(box => {
+            box.classList.remove('selected');
+            box.querySelector('.order-number').textContent = '';
+        });
+        document.getElementById('feedback1').style.display = 'none';
+    }
+
+    function checkAnswer1() {
+        const feedback = document.getElementById('feedback1');
+
+        if (selectedOrder1.length === 0) {
+            feedback.className = 'feedback error';
+            feedback.textContent = '❌ Please select boxes to create your flow!';
+            return;
+        }
+
+        const isCorrect = JSON.stringify(selectedOrder1) === JSON.stringify(correctOrder1);
+
+        if (isCorrect) {
+            feedback.className = 'feedback success';
+            feedback.textContent = '✅ Excellent! The correct flow is: Client Mailbox → Server Mailbox → LLM Agent → Knowledge Bank → Product Database → Server Mailbox → Client Mailbox. The LLM agent receives the email, retrieves relevant information from both the knowledge bank and product database, then sends a response back to the client.';
+        } else {
+            feedback.className = 'feedback error';
+            feedback.textContent = '❌ Not quite right. Think about: Where does the email arrive? Who processes it? What information sources are needed? How does the response get back to the client? Try again!';
+        }
+    }
+
+    // Exercise 2: Admin Analytics Flow
+    let selectedOrder2 = [];
+    let selectionMap2 = {};
+    const correctOrder2 = [1, 2, 3, 4, 5, 6];
+
+    document.querySelectorAll('#flow2 .flow-box').forEach(box => {
+        box.addEventListener('click', function() {
+            const id = parseInt(this.getAttribute('data-id'));
+
+            // If already selected, unselect it
+            if (this.classList.contains('selected')) {
+                const orderNum = selectionMap2[id];
+                delete selectionMap2[id];
+
+                // Clear all and rebuild
+                document.querySelectorAll('#flow2 .flow-box').forEach(b => {
+                    b.classList.remove('selected');
+                    b.querySelector('.order-number').textContent = '';
+                });
+
+                // Remove this selection and rebuild
+                selectedOrder2 = selectedOrder2.filter((val, idx) => idx !== orderNum - 1);
+                selectionMap2 = {};
+
+                // Re-apply selections
+                selectedOrder2.forEach((itemId, idx) => {
+                    const targetBox = document.querySelector(`#flow2 .flow-box[data-id="${itemId}"]`);
+                    if (targetBox) {
+                        targetBox.classList.add('selected');
+                        targetBox.querySelector('.order-number').textContent = idx + 1;
+                        selectionMap2[itemId] = idx + 1;
+                    }
+                });
+            } else {
+                // Add new selection
+                selectedOrder2.push(id);
+                const orderNum = selectedOrder2.length;
+                this.classList.add('selected');
+                this.querySelector('.order-number').textContent = orderNum;
+                selectionMap2[id] = orderNum;
+            }
+        });
+    });
+
+    function resetFlow2() {
+        selectedOrder2 = [];
+        selectionMap2 = {};
+        document.querySelectorAll('#flow2 .flow-box').forEach(box => {
+            box.classList.remove('selected');
+            box.querySelector('.order-number').textContent = '';
+        });
+        document.getElementById('feedback2').style.display = 'none';
+    }
+
+    function checkAnswer2() {
+        const feedback = document.getElementById('feedback2');
+
+        if (selectedOrder2.length === 0) {
+            feedback.className = 'feedback error';
+            feedback.textContent = '❌ Please select boxes to create your flow!';
+            return;
+        }
+
+        const isCorrect = JSON.stringify(selectedOrder2) === JSON.stringify(correctOrder2);
+
+        if (isCorrect) {
+            feedback.className = 'feedback success';
+            feedback.textContent = '✅ Perfect! The correct flow is: Admin Request → Authentication → LLM Agent → ORM Layer → Database → Plotting Tool. The admin is authenticated first, the LLM interprets the request, the ORM translates it to a database query, data is retrieved, and finally visualized with the plotting tool.';
+        } else {
+            feedback.className = 'feedback error';
+            feedback.textContent = '❌ Not quite. Consider: What happens first for security? How does the LLM access the database? What creates the visualization? Try again!';
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+// Demo Database Schema for Day 2 Agentic AI Notebook
+// Copy this to https://dbdiagram.io to generate the visual diagram
+
+Table customers {
+  customer_id integer [pk]
+  name text [not null]
+  email text [not null]
+  phone text
+  registration_date text
+}
+
+Table products {
+  product_id integer [pk]
+  name text [not null]
+  description text
+  price real
+  stock_quantity integer
+  category text
+}
+
+Table sales {
+  sale_id integer [pk]
+  product_id integer [ref: > products.product_id]
+  customer_id integer [ref: > customers.customer_id]
+  quantity integer
+  sale_date text
+}

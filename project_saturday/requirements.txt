@@ -1,0 +1,6 @@
+# Core dependencies for Day 2 Agentic AI Notebook
+google-generativeai>=0.3.0
+ipywidgets>=8.1.0
+IPython>=8.12.0
+
+# Note: sqlite3 is built-in with Python, no installation needed
