@@ -664,12 +664,31 @@ SQL Query:"""
     )
 
     sql = response.choices[0].message.content.strip()
+
+    # Remove markdown code blocks
     if sql.startswith("```sql"):
         sql = sql[6:]
     if sql.startswith("```"):
         sql = sql[3:]
     if sql.endswith("```"):
         sql = sql[:-3]
+
+    sql = sql.strip()
+
+    # Remove common prefixes that the LLM might add
+    # Look for the first occurrence of SELECT, INSERT, UPDATE, DELETE, WITH, or CREATE
+    sql_keywords = ['SELECT', 'INSERT', 'UPDATE', 'DELETE', 'WITH', 'CREATE']
+    sql_upper = sql.upper()
+
+    earliest_pos = len(sql)
+    for keyword in sql_keywords:
+        pos = sql_upper.find(keyword)
+        if pos != -1 and pos < earliest_pos:
+            earliest_pos = pos
+
+    # If we found a SQL keyword and it's not at the start, trim everything before it
+    if earliest_pos > 0 and earliest_pos < len(sql):
+        sql = sql[earliest_pos:]
 
     return sql.strip()
 
