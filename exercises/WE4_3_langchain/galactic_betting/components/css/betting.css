@@ -1,0 +1,186 @@
+/* Betting Component Styles */
+.bet-team-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    width: auto;
+}
+
+.bet-team-btn:hover {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.bet-team-btn.home {
+    justify-content: flex-end;
+}
+
+.bet-team-btn.away {
+    justify-content: flex-start;
+}
+
+.bet-team-btn .team-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ccc;
+}
+
+.bet-team-btn .team-logo-match {
+    width: 90px;
+    height: 90px;
+}
+
+.odds-badge {
+    background: #8b5cf6;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.vs-badge {
+    font-size: 11px;
+    color: #444;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Bet Cards */
+.bet-card {
+    padding: 12px 16px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.bet-card:last-child {
+    border-bottom: none;
+}
+
+.bet-card.pending {
+    border-left: 3px solid #8b5cf6;
+}
+
+.bet-card.won {
+    border-left: 3px solid #10b981;
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.bet-card.lost {
+    border-left: 3px solid #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.bet-match {
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.bet-details {
+    font-size: 12px;
+    color: #888;
+}
+
+.bet-amount {
+    font-size: 12px;
+    color: #10b981;
+    margin-top: 4px;
+}
+
+.bet-status {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 6px;
+    color: #8b5cf6;
+}
+
+.bet-card.won .bet-status {
+    color: #10b981;
+}
+
+.bet-card.lost .bet-status {
+    color: #ef4444;
+}
+
+.no-bets {
+    padding: 24px;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+}
+
+/* Bet Form */
+.bet-form {
+    display: none;
+    padding: 16px;
+    background: rgba(139, 92, 246, 0.05);
+    border-top: 1px solid #2a2a2a;
+}
+
+.bet-form.active {
+    display: block;
+}
+
+.bet-form p {
+    font-size: 13px;
+    color: #ccc;
+    margin-bottom: 12px;
+}
+
+.bet-form-row {
+    display: flex;
+    gap: 8px;
+}
+
+.bet-form input {
+    flex: 1;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.bet-form input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+}
+
+.bet-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+/* Reveal Button */
+.reveal-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 16px;
+}
+
+.reveal-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}

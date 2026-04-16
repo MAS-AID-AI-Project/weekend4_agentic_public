@@ -1,0 +1,13 @@
+# Requirements for Day 1: LangChain Agents Notebook
+# Let pip resolve compatible versions automatically
+
+langchain
+langchain-openai
+langchain-core
+langchain-community
+langchain-classic
+langsmith
+openai
+ipywidgets
+ddgs
+wikipedia

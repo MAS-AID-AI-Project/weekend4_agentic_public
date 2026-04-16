@@ -1,0 +1,59 @@
+/* Header Component Styles */
+.header {
+    background: linear-gradient(180deg, #1a1a2e 0%, #0d0d0d 100%);
+    padding: 20px 32px;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.logo h1 span {
+    color: #8b5cf6;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.current-date {
+    color: #888;
+    font-size: 13px;
+}
+
+.current-date strong {
+    color: #10b981;
+}
+
+.wallet {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.wallet::before {
+    content: "GC";
+    font-size: 11px;
+    opacity: 0.7;
+}

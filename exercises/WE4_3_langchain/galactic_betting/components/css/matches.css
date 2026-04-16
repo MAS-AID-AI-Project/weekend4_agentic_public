@@ -1,0 +1,136 @@
+/* Match Row Styles */
+.date-group {
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.date-group:last-child {
+    border-bottom: none;
+}
+
+.date-header {
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #1a1a1a;
+}
+
+.date-header.upcoming {
+    color: #8b5cf6;
+}
+
+.match-row {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 16px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.match-row:last-child {
+    border-bottom: none;
+}
+
+.match-row.upcoming {
+    background: rgba(139, 92, 246, 0.03);
+}
+
+.match-time {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+.match-content-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.match-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 520px;
+}
+
+.match-content.betting {
+    gap: 8px;
+    width: 580px;
+}
+
+.match-team {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 200px;
+}
+
+.match-team.home {
+    justify-content: flex-end;
+}
+
+.match-team.away {
+    justify-content: flex-start;
+}
+
+.match-team .team-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ccc;
+}
+
+.match-team.winner .team-name {
+    color: #10b981;
+}
+
+.match-score-box {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #222;
+    padding: 6px 12px;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.match-score-box .score {
+    font-size: 16px;
+    font-weight: 700;
+    color: #888;
+    min-width: 20px;
+    text-align: center;
+}
+
+.match-score-box .score.winner {
+    color: #10b981;
+}
+
+.score-separator {
+    color: #444;
+}
+
+.match-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.round-tag {
+    font-size: 11px;
+    color: #666;
+    background: #1a1a1a;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.round-tag.upcoming {
+    color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.penalties {
+    font-size: 11px;
+    color: #f59e0b;
+}

@@ -1,0 +1,107 @@
+/* Modal Component Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.result-item {
+    padding: 12px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.result-item .match {
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.result-item .details {
+    font-size: 12px;
+    color: #888;
+}
+
+.result-item.won {
+    border-left: 3px solid #10b981;
+}
+
+.result-item.lost {
+    border-left: 3px solid #ef4444;
+}
+
+.final-result {
+    text-align: center;
+    padding: 24px;
+    margin-top: 16px;
+    background: #1a1a1a;
+    border-radius: 12px;
+}
+
+.final-result .balance {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.final-result .profit {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.final-result .profit.positive {
+    color: #10b981;
+}
+
+.final-result .profit.negative {
+    color: #ef4444;
+}
+
+.modal-close {
+    width: 100%;
+    padding: 12px;
+    background: #2a2a2a;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.modal-close:hover {
+    background: #333;
+}
