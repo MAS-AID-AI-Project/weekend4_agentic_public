@@ -1029,6 +1029,7 @@ def _openrouter_request(
         "model": api_config["model"],
         "messages": messages,
         "temperature": 0,
+        "top_p": 1,
         "max_tokens": max_tokens,
     }
     if tools:
@@ -1453,9 +1454,22 @@ def is_strict_abstention(text: str) -> bool:
     return normalize(text) == normalize(ABSTAIN_TEXT)
 
 
-def has_unsupported_conclusion(text: str) -> bool:
+def split_into_scoring_clauses(text: str) -> List[str]:
     normalized = normalize(text)
-    return any(marker in normalized for marker in UNANSWERABLE_DISQUALIFIERS)
+    return [
+        clause.strip()
+        for clause in re.split(r"[.!?;]+|\bbut\b|\bhowever\b|\byet\b", normalized)
+        if clause.strip()
+    ]
+
+
+def has_unsupported_conclusion(text: str) -> bool:
+    for clause in split_into_scoring_clauses(text):
+        if is_abstention(clause):
+            continue
+        if any(marker in clause for marker in UNANSWERABLE_DISQUALIFIERS):
+            return True
+    return False
 
 
 def score_answer(item: Dict[str, Any], answer: str) -> Dict[str, Any]:
@@ -1545,6 +1559,9 @@ def run_item(item: Dict[str, Any], cfg: AgentConfig) -> Dict[str, Any]:
             else:
                 answer = recovered
                 tool_trace = tool_trace + [tool_trace_entry("evidence_check", "recovered supported answer from fallback")]
+        if is_abstention(answer) and answer != ABSTAIN_TEXT:
+            answer = ABSTAIN_TEXT
+            tool_trace = tool_trace + [tool_trace_entry("evidence_check", "canonicalized abstention text")]
 
     result = {
         "id": item["id"],
